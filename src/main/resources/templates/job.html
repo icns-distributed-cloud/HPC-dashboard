@@ -1,0 +1,287 @@
+<html xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+<script type="text/javascript" src="js/launchJobPage.js?timestamp=201706202227"></script>
+<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/form_select2.js"></script>
+<script type="text/javascript" src="assets/js/plugins/forms/styling/uniform.min.js"></script>
+
+<script type="text/javascript" src="assets/js/core/app.js"></script>
+<script type="text/javascript" src="assets/js/pages/form_inputs.js"></script>
+
+<script type="text/javascript" src="assets/js/plugins/ui/ripple.min.js"></script>
+<!-- /theme JS files -->
+
+
+<script type="text/javascript" src="assets/js/plugins/sliders/ion_rangeslider.min.js"></script>
+<script type="text/javascript" src="assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/extra_sliders_ion.js"></script>
+<script type="text/javascript" src="js/job.js"></script>
+
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <i class="icon-star-full2 position-left"></i>
+                <span class="text-semibold">Job Launch</span>
+            </h4>
+        </div>
+
+        <!--
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+
+                <a href="#" class="btn btn-link btn-float has-text">
+                    <i class="icon-calculator text-primary"></i>
+                    <span>Invoices</span>
+                </a>
+
+            </div>
+        </div>
+        -->
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a href="index.html">
+                    <i class="icon-home2 position-left">
+                    </i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <i class="icon-star-full2 position-left"> </i>
+                Job Launch
+            </li>
+            <!-- <li class="active">Sizing< /li>  -->
+        </ul>
+
+        <ul class="breadcrumb-elements">
+            <li>
+                <a data-toggle="modal" data-target="#modal_support">
+                    <i class="icon-comment-discussion position-left"></i>
+                    Support
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <!-- Extra large table -->
+
+    <div class="panel panel-flat" style="height: 550px">
+        <div class="panel-heading">
+            <h5 class="panel-title">Launch New Job</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <fieldset class="content-group">
+                <legend class="text-bold">Job Information</legend>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3">Job Name<span class="text-danger">*</span></label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="ex) myjob" id="job-name"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form class="form-horizontal" action="#">
+                            <form class="form-horizontal" action="#">
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Process Number<span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control"
+                                               placeholder="ex) 4" id="job-process-number"/>
+                                    </div>
+                                </div>
+                            </form>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form class="form-horizontal" action="#">
+                            <form class="form-horizontal" action="#">
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Select Image <span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                        <select class="select" id="image-list" >
+                                            <option th:each="listValue,index : ${imageList}" th:value="${listValue.mpilib}"><span th:text="${listValue.name}"></span></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form class="form-horizontal" action="#">
+                            <form class="form-horizontal" action="#">
+                                <div class="form-group">
+                                    <label class="control-label col-lg-3">Job Description<span class="text-danger">*</span></label>
+                                    <div class="col-lg-9">
+                                       <textarea rows="1" cols="5" class="form-control"
+                                                 placeholder="Your Description for job" id="job-description"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group has-success has-feedback">
+                                <label class="control-label col-lg-2 text-semibold">Extra MPI Commands<span class="text-danger">*</span></label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" placeholder="mpirun ..." id="mpi-command"/>
+                                    <div class="form-control-feedback">
+                                        <i class="icon-checkmark-circle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="content-group">
+                <legend class="text-bold">Resource Allocation</legend>
+
+                <div class="row">
+                <!-- Blk I/O, Network I/O -->
+
+                <div class="col-md-3">
+                    <form class="form-horizontal" action="#">
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group">
+                                <label class="control-label col-lg-6">File Read</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="block-input" placeholder="ex) 4mb"/>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+
+                <div class="col-md-3">
+                    <form class="form-horizontal" action="#">
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group">
+                                <label class="control-label col-lg-6">File Write</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="block-out" placeholder="ex) 1mb"/>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+
+                <div class="col-md-3">
+                    <form class="form-horizontal" action="#">
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group">
+                                <label class="control-label col-lg-6">Network Input</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="network-input" placeholder="ex) 4mb"/>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+
+                <div class="col-md-3">
+                    <form class="form-horizontal" action="#">
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group">
+                                <label class="control-label col-lg-6">Network Output</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="network-output" placeholder="ex) 4mb"/>
+                                </div>
+                            </div>
+                        </form>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-body border-top-danger">
+                        <div class="text-center">
+                            <h6 class="no-margin">Memory Limit (MB)</h6>
+                           <!-- <p class="content-group-sm text-muted">Set Memory Limit
+                                (MB)</p> -->
+                        </div>
+                        <div id="ion-start"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-body border-top-danger">
+                        <div class="text-center">
+                            <h6 class="no-margin">CPUs</h6>
+                           <!-- <p class="content-group-sm text-muted">Set CPUs <Number></Number>
+                                Ratio</p>-->
+                        </div>
+                        <div id="ion-start2"></div>
+                    </div>
+                </div>
+            </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="form-group">
+            <button type="button" class="btn bg-slate-400 btn-block" onclick="submitJob();">
+                Launch <i class="icon-circle-right2 position-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer text-muted">
+        &copy; 2017. Kyung Hee Univ by <a
+            href="http://blog.naver.com/alice_k106" target="_blank">alicek106</a>
+    </div>
+    <!-- /footer -->
+</div>
+
+</html>
+
+<div id="modal_support" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h6 class="modal-title">Support Information</h6>
+            </div>
+
+            <div class="modal-body">
+                <h6 class="text-semibold">Technical Support</h6>
+                <hr/>
+                <p>Kyung Hee University, ICNS Lab.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

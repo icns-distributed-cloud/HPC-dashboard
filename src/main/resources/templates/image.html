@@ -1,0 +1,392 @@
+    <html xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<script type="text/javascript" src="js/image.js?201708171857"></script>
+<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/form_select2.js"></script>
+<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+<script type="text/javascript" src="assets/js/plugins/notifications/pnotify.min.js"></script>
+
+<!--
+<option th:each="listValue : ${imageList}">
+    <p th:text="${listValue.name}"></p>
+</option>
+-->
+
+<script>
+    if (sessionStorage.getItem('buildContainerCreationResult') != null) {
+        var result = sessionStorage.getItem('buildContainerCreationResult');
+
+        sessionStorage.removeItem('buildContainerCreationResult');
+
+        if(result == 0){
+            $(document).ready(function() {
+                new PNotify({
+                    title : 'Successfully created server.',
+                    text : 'You can login to server by ssh key.',
+                    addclass : 'bg-success'
+                });
+            });
+        }else if(result == -1){
+            $(document).ready(function() {
+                new PNotify({
+                    title : 'Failed to create server.',
+                    text : 'Call to admin.',
+                    addclass : 'bg-danger'
+                });
+            });
+        }
+    }
+</script>
+
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <i class="icon-stack2 position-left"></i>
+                <span class="text-semibold">Image Management</span>
+            </h4>
+        </div>
+
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a href="#" class="btn btn-link btn-float has-text" data-toggle="modal" data-target="#modal_default">
+                    <i class="icon-file-plus text-primary"></i>
+                    <span>Create new build server</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a href="index.html" onclick="sessionStorage.setItem('page', 4)">
+                    <i class="icon-home2 position-left"></i>Home
+                </a>
+            </li>
+            <li>
+                <i class="icon-stack2 position-left"> </i>
+                Image Management
+            </li>
+            <!-- <li class="active">Sizing</li>  -->
+        </ul>
+
+        <ul class="breadcrumb-elements">
+            <li>
+                <a data-toggle="modal" data-target="#modal_support">
+                    <i class="icon-comment-discussion position-left"></i>
+                    Support
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <script type="text/javascript" src="assets/js/plugins/notifications/pnotify.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/visualization/echarts/echarts.js"></script>
+
+
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">Image Build Server</h6>
+            <div class="heading-elements">
+            </div>
+        </div>
+
+        <div class="datatable-scroll">
+            <table class="table text-nowrap" th:each="listValue : ${containerList}">
+                <thead>
+                <tr>
+                    <th>Build Server Name</th>
+                    <th class="col-md-2">Base Image</th>
+                    <th class="col-md-2">Created</th>
+                    <th class="col-md-2">MPI Version</th>
+                    <th class="col-md-2">Connect URL</th>
+                    <th class="col-md-2">Build</th>
+                    <th class="col-md-1 text-center">Control</th>
+                </tr>
+                </thead>
+                <tbody id="job-status">
+
+                <tr>
+                    <td>
+                        <div class="media-left">
+                            <h6>
+                                <a href="#" class="text-default text-semibold" th:text="${listValue.name}"></a>
+                            </h6>
+                        </div>
+                    </td>
+                    <td><span th:text="${listValue.baseimage}"></span></td>
+                    <td><span class="text-muted" th:text="${listValue.created}"></span></td>
+                    <td><span class="text-success-600" th:text="${listValue.mpilib}"></span></td>
+                    <td><span class="text-semibold" th:text="${listValue.server}"></span></td>
+                    <td>
+                        <button type="button" class="btn btn-default btn-sm"
+                                th:onclick="'setBuildSession(\'' + ${listValue.name} + '\', \'' + ${listValue.baseimage} + '\');'"
+                                data-toggle="modal" data-target="#modal_build">
+                            Build
+                        </button>
+                    </td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a th:href="${'keys/' + listValue.user + '-' + listValue.name + '.pem'}"
+                                           th:attr="download=${listValue.user + '-' + listValue.name + '.pem'}" >
+                                        <i class="icon-checkmark3 text-success"></i> Download Key</a>
+                                    </li>
+                                    <li><a th:onclick="'deleteBuildContainer(\'' + ${listValue.name} + '\');'"><i class="icon-cross2 text-danger"></i> Delete Container</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Available Images</h6>
+                    <div class="heading-elements">
+                       <!-- <button type="button" class="btn btn-link daterange-ranges heading-btn text-semibold">
+                            <i class="icon-calendar3 position-left"></i> <span></span> <b class="caret"></b>
+                        </button> -->
+                    </div>
+                </div>
+
+                <div class="datatable-scroll">
+                    <table class="table text-nowrap">
+                        <thead>
+                        <tr>
+                            <th class="text-center" style="width: 50px">Status</th>
+                            <th class="text-center" style="width: 150px;">OS</th>
+                            <th style="width: 200px;">Name</th>
+                            <th>Description</th>
+                            <th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="active border-double">
+                                <td colspan="5">Built Images</td>
+                            </tr>
+
+                            <tr  th:each="listValue,index : ${imageList}">
+                                <td class="text-center">
+                                    <div class="text-muted text-size-small">
+                                        <span th:id="'image-status-mark-' + ${index.index}" class="status-mark position-left"></span>
+                                        <span th:text="${listValue.status}" th:id="'image-status-' + ${index.index}"></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <img th:src="'image/' + ${listValue.baseimage} + '-logo.png'" style="max-width: 100%; height: auto;"/>
+                                </td>
+                                <td>
+                                    <div class="media-body">
+                                        <a class="display-inline-block text-default text-semibold letter-icon-title">
+                                            <span th:text="${listValue.name}" th:id="'image-name-' + ${index.index}"></span>
+                                        </a>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-default display-inline-block">
+                                        <span class="text-semibold" th:text="${listValue.metadata}"></span>
+                                        <span class="display-block text-muted" th:text="'Created :' + ${listValue.created}"></span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li>
+                                                    <a th:onclick="'distributeImage(\'' + ${index.index} + '\');'">
+                                                        <i class="icon-checkmark3 text-success">
+                                                        </i>
+                                                    Distribute
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer text-muted">
+        &copy; 2017. Kyung Hee Univ by <a
+            href="http://blog.naver.com/alice_k106" target="_blank">alicek106</a>
+    </div>
+    <!-- /footer -->
+</div>
+
+<div id="modal_support" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h6 class="modal-title">Support Information</h6>
+            </div>
+
+            <div class="modal-body">
+                <h6 class="text-semibold">Technical Support</h6>
+                <hr/>
+                <p>Kyung Hee University, ICNS Lab.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal_default" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">Create New Build Server</h5>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- <h6 class="text-semibold">Program Information</h6>
+                <p>Program Information</p>-->
+                <form class="form-horizontal form-validate-jquery">
+                    <fieldset class="content-group">
+                        <legend class="text-bold">Information</legend>
+
+                        <!-- Basic text input -->
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 text-semibold">Server Name <span class="text-danger">*</span></label>
+                            <div class="col-lg-9">
+                                <input type="text" name="basic" class="form-control"  placeholder="program name" id="container-name"/>
+                            </div>
+                        </div>
+                        <!-- /basic text input -->
+
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 text-semibold">Base OS <span class="text-danger">*</span></label>
+                                <div class="col-lg-9">
+
+                                    <select class="select" id="image-list">
+                                        <option value="centos">Centos 7</option>
+                                        <option value="ubuntu">Ubuntu 14.04</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+
+                        <form class="form-horizontal" action="#">
+                            <div class="form-group">
+                                <label class="control-label col-lg-3 text-semibold">Default MPI Library<span class="text-danger">*</span></label>
+                                <div class="col-lg-9">
+                                    <select class="select" id="mpilib-list">
+                                        <option value="mpich3.2v">MPICH 3.2v</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+
+                    </fieldset>
+
+                    <div class="text-right">
+                        <button type="reset" class="btn btn-default" data-dismiss="modal">cancel</button>
+                        <button type="button" class="btn btn-slate" onclick="createBuildServer();">Create <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="modal_build" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title">Build New Image</h5>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- <h6 class="text-semibold">Program Information</h6>
+                <p>Program Information</p>-->
+                <form class="form-horizontal form-validate-jquery">
+                    <fieldset class="content-group">
+                        <legend class="text-bold">Information</legend>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 text-semibold">Container Name <span class="text-danger"></span></label>
+                            <div class="col-lg-9">
+                                <input type="text" name="basic" class="form-control"  disabled="true"  placeholder="program name" id="build-container-name"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 text-semibold">Base Image <span class="text-danger"></span></label>
+                            <div class="col-lg-9">
+                                <input type="text" name="basic" class="form-control"  disabled="true" placeholder="program name" id="build-base-image"/>
+                            </div>
+                        </div>
+
+                        <!-- Basic text input -->
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 text-semibold">Image Name <span class="text-danger">*</span></label>
+                            <div class="col-lg-9">
+                                <input type="text" name="basic" class="form-control"  placeholder="program name" id="image-name"/>
+                            </div>
+                        </div>
+                        <!-- /basic text input -->
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 text-semibold">Image Tag <span class="text-danger">*</span></label>
+                            <div class="col-lg-9">
+                                <input type="text" name="basic" class="form-control"  placeholder="program name" id="image-tag"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-3 text-semibold">Description <span class="text-danger">*</span></label>
+                            <div class="col-lg-9">
+                                <input type="text" name="basic" class="form-control"  placeholder="program name" id="image-description"/>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="text-right">
+                        <button type="reset" class="btn btn-default" data-dismiss="modal">cancel</button>
+                        <button type="button" class="btn btn-slate" onclick="buildNewImage();">Create <i class="icon-arrow-right14 position-right"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    setColumnStyle()
+</script>
+</html>

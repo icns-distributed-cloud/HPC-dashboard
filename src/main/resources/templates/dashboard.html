@@ -1,0 +1,470 @@
+<script type="text/javascript" src="js/compileProgramPage.js?timestamp=201706192315"></script>
+<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/form_select2.js"></script>
+<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+
+<!-- Page header -->
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <i class="icon-grid5 position-left"></i>
+                <span class="text-semibold">Summary Report</span>
+            </h4>
+        </div>
+
+        <!--
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+
+                <a href="#" class="btn btn-link btn-float has-text">
+                    <i class="icon-calculator text-primary"></i>
+                    <span>Invoices</span>
+                </a>
+
+            </div>
+        </div>
+        -->
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a href="index.html">
+                    <i class="icon-home2 position-left">
+                    </i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <i class="icon-grid5 position-left"> </i>
+                Summary Report
+            </li>
+            <!-- <li class="active">Sizing</li>  -->
+        </ul>
+
+        <ul class="breadcrumb-elements">
+            <li>
+                <a data-toggle="modal" data-target="#modal_support">
+                    <i class="icon-comment-discussion position-left"></i>
+                    Support
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+    <script type="text/javascript" src="assets/js/plugins/notifications/pnotify.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/visualization/echarts/echarts.js"></script>
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Recent Events</h6>
+                    <div class="heading-elements">
+                       <!-- <button type="button" class="btn btn-link daterange-ranges heading-btn text-semibold">
+                            <i class="icon-calendar3 position-left"></i> <span></span> <b class="caret"></b>
+                        </button> -->
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-nowrap">
+                        <thead>
+                        <tr>
+                            <th style="width: 50px">Due</th>
+                            <th style="width: 300px;">User</th>
+                            <th>Description</th>
+                            <th class="text-center" style="width: 20px;"><i class="icon-arrow-down12"></i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="active border-double">
+                                <td colspan="3">Activation Logs</td>
+                                <td class="text-right">
+                                    <span class="badge bg-blue">4</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <h6 class="no-margin">12 <small class="display-block text-size-small no-margin">hours</small></h6>
+                                </td>
+                                <td>
+                                    <div class="media-left media-middle">
+                                        <a href="#" class="btn bg-teal-400 btn-rounded btn-icon btn-xs">
+                                            <span class="letter-icon"></span>
+                                        </a>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <a href="#" class="display-inline-block text-default text-semibold letter-icon-title">Annabelle Doney</a>
+                                        <div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-default display-inline-block">
+                                        <span class="text-semibold">[#1183] Workaround for OS X selects printing bug</span>
+                                        <span class="display-block text-muted">Chrome fixed the bug several versions ago, thus rendering this...</span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#"><i class="icon-undo"></i> Quick reply</a></li>
+                                                <li><a href="#"><i class="icon-history"></i> Full history</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#"><i class="icon-checkmark3 text-success"></i> Resolve issue</a></li>
+                                                <li><a href="#"><i class="icon-cross2 text-danger"></i> Close issue</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <h6 class="no-margin">16 <small class="display-block text-size-small no-margin">hours</small></h6>
+                                </td>
+                                <td>
+                                    <div class="media-left media-middle">
+                                        <a href="#"><img src="assets/images/placeholder.jpg" class="img-circle img-xs" alt=""/></a>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <a href="#" class="display-inline-block text-default text-semibold letter-icon-title">Chris Macintyre</a>
+                                        <div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-default display-inline-block">
+                                        <span class="text-semibold">[#1249] Vertically center carousel controls</span>
+                                        <span class="display-block text-muted">Try any carousel control and reduce the screen width below...</span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#"><i class="icon-undo"></i> Quick reply</a></li>
+                                                <li><a href="#"><i class="icon-history"></i> Full history</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#"><i class="icon-checkmark3 text-success"></i> Resolve issue</a></li>
+                                                <li><a href="#"><i class="icon-cross2 text-danger"></i> Close issue</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <h6 class="no-margin">20 <small class="display-block text-size-small no-margin">hours</small></h6>
+                                </td>
+                                <td>
+                                    <div class="media-left media-middle">
+                                        <a href="#" class="btn bg-blue btn-rounded btn-icon btn-xs">
+                                            <span class="letter-icon"></span>
+                                        </a>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <a href="#" class="display-inline-block text-default text-semibold letter-icon-title">Robert Hauber</a>
+                                        <div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-default display-inline-block">
+                                        <span class="text-semibold">[#1254] Inaccurate small pagination height</span>
+                                        <span class="display-block text-muted">The height of pagination elements is not consistent with...</span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#"><i class="icon-undo"></i> Quick reply</a></li>
+                                                <li><a href="#"><i class="icon-history"></i> Full history</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#"><i class="icon-checkmark3 text-success"></i> Resolve issue</a></li>
+                                                <li><a href="#"><i class="icon-cross2 text-danger"></i> Close issue</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <h6 class="no-margin">40 <small class="display-block text-size-small no-margin">hours</small></h6>
+                                </td>
+                                <td>
+                                    <div class="media-left media-middle">
+                                        <a href="#" class="btn bg-warning-400 btn-rounded btn-icon btn-xs">
+                                            <span class="letter-icon"></span>
+                                        </a>
+                                    </div>
+
+                                    <div class="media-body">
+                                        <a href="#" class="display-inline-block text-default text-semibold letter-icon-title">Dex Sponheim</a>
+                                        <div class="text-muted text-size-small"><span class="status-mark border-blue position-left"></span> Active</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="#" class="text-default display-inline-block">
+                                        <span class="text-semibold">[#1184] Round grid column gutter operations</span>
+                                        <span class="display-block text-muted">Left rounds up, right rounds down. should keep everything...</span>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <ul class="icons-list">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#"><i class="icon-undo"></i> Quick reply</a></li>
+                                                <li><a href="#"><i class="icon-history"></i> Full history</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#"><i class="icon-checkmark3 text-success"></i> Resolve issue</a></li>
+                                                <li><a href="#"><i class="icon-cross2 text-danger"></i> Close issue</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+
+
+            <!-- Docker Engine Report -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">Job Process Report</h6>
+                </div>
+
+                <div class="panel-body=index">
+                    <div class="container-fluid">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div class="content-group">
+                                    <h4 class="text-semibold no-margin" id="all-servers">
+                                        <i class="icon-server position-left text-slate"></i>
+                                        1
+                                    </h4>
+                                    <span class="text-muted text-size-small"><h7>Proccesses</h7></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="content-group">
+                                    <h4 class="text-semibold no-margin" id="all-running-containers">
+                                        <i class=" icon-play3 position-left text-slate"></i>
+                                        1
+                                    </h4>
+                                    <span class="text-muted text-size-small"><h7>Running Job</h7></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="content-group">
+                                    <h4 class="text-semibold no-margin" id="all-stopped-containers">
+                                        <i class="icon-stop position-left text-slate"></i>
+                                        3
+                                    </h4>
+                                    <span class="text-muted text-size-small"><h7>Completeed Job</h7></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Docker Engine Report End-->
+
+            <!-- Registry Report -->
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        Image Report
+                    </h6>
+                </div>
+
+                <div class="panel-body-index">
+                    <div class="container-fluid">
+                        <div class="row text-center">
+                            <div class="col-md-6">
+                                <div class="content-group">
+                                    <h4 class="text-semibold no-margin" id="registry-image-size">
+                                        <i class="icon-database2 position-left text-slate"></i>
+                                        27
+                                    </h4>
+                                    <span class="text-muted text-size-small"><h7>Committed Image</h7></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="content-group">
+                                    <h4 class="text-semibold no-margin" id="registry-recently-pushed-image">
+                                        <i class="icon-checkmark-circle2 position-left text-slate"></i>
+                                        3
+                                    </h4>
+                                    <span class="text-muted text-size-small"><h7>Available Image</h7></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-flat">
+                <div class="panel-heading">
+                    <h6 class="panel-title">
+                        Last Image Commit
+                    </h6>
+                </div>
+
+                <div class="panel-body-index">
+                    <div class="container-fluid">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="content-group">
+                                    <h6 class="text-semibold no-margin">
+                                        <i class="icon-database2 position-left text-slate"></i>
+                                        2017. 07. 25. 13:25
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Registry Report End -->
+
+        </div>
+    </div>
+
+
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h6 class="panel-title">Job Status Report</h6>
+            <div class="heading-elements">
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-lg text-nowrap">
+                <tbody>
+                <tr>
+                    <td class="col-md-5">
+                        <div class="media-left">
+                            <div id="campaigns-donut"></div>
+                        </div>
+
+
+                        <div class="media-left">
+                            <ul class="list-inline list-inline-condensed no-margin">
+                                <li><span class="status-mark border-success" id="all-server-mem-status-mark"></span></li>
+                                <li><span class="text-muted" id="today_mem">10 vCPU Allocated</span></li>
+                            </ul>
+                        </div>
+                    </td>
+
+                    <td class="col-md-5">
+                        <div class="media-left">
+                            <div id="campaign-status-pie"></div>
+                        </div>
+
+                        <div class="media-left">
+                            <ul class="list-inline list-inline-condensed no-margin">
+                                <li><span class="status-mark border-danger" id="all-server-cpu-status-mark"></span></li>
+                                <li><span class="text-muted" id="today_cpu">12800 MB memory Allocated</span></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+        <div class="table-responsive">
+            <table class="table text-nowrap">
+                <thead>
+                <tr>
+                    <th>Job Name</th>
+                    <th class="col-md-2">Proccess</th>
+                    <th class="col-md-2">Executable File</th>
+                    <th class="col-md-2">Additional Command</th>
+                    <th class="col-md-2">Created</th>
+                    <th class="col-md-2">Status</th>
+                    <th class="col-md-2">Details</th>
+                </tr>
+                </thead>
+                <tbody id="job-status">
+
+                    <tr>
+                        <td>
+                            <div class="media-left">
+                                <h6>
+                                    <a href="#" class="text-default text-semibold">myjob</a>
+                                </h6>
+                            </div>
+                        </td>
+                        <td><span class="text-muted">12</span></td>
+                        <td><span class="text-success-600">/root/graph500/graph</span></td>
+                        <td><span class="text-success-600"> 10 1000</span></td>
+
+                        <td><h6 class="text-semibold">2017-06-13</h6></td>
+                        <td><span class="label bg-blue">Running</span></td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal_default">
+                                Details
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="footer text-muted">
+        &copy; 2017. Kyung Hee Univ by <a
+            href="http://blog.naver.com/alice_k106" target="_blank">alicek106</a>
+    </div>
+    <!-- /footer -->
+</div>
+
+<div id="modal_support" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h6 class="modal-title">Support Information</h6>
+            </div>
+
+            <div class="modal-body">
+                <h6 class="text-semibold">Technical Support</h6>
+                <hr/>
+                <p>Kyung Hee University, ICNS Lab.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

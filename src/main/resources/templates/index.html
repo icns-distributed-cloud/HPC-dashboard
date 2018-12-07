@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Testbed</title>
+
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/core.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/components.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/colors.css" rel="stylesheet" type="text/css"/>
+    <!-- /global stylesheets -->
+
+    <!-- Core JS files -->
+
+    <script type="text/javascript" src="assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
+    <!-- /core JS files -->
+
+    <script type="text/javascript" src="assets/js/core/app.js"></script>
+
+    <!-- /theme JS files -->
+
+</head>
+
+<body>
+
+<!-- Main navbar -->
+<div class="navbar navbar-inverse">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">HPC Cloud Testbed</a>
+
+        <ul class="nav navbar-nav visible-xs-block">
+            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+            <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+        </ul>
+    </div>
+
+    <div class="navbar-collapse collapse" id="navbar-mobile">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-puzzle3"></i>
+                    <span class="visible-xs-inline-block position-right">Updates</span>
+                    <span class="status-mark border-pink-300"></span>
+                </a>
+
+                <div class="dropdown-menu dropdown-content">
+                    <div class="dropdown-content-heading">
+                        Updates
+                    </div>
+
+                    <ul class="media-list dropdown-content-body width-350">
+                        <li class="media">
+                            <div class="media-left">
+                                <a href="#" class="btn border-primary text-primary btn-flat btn-rounded btn-icon btn-sm"><i class="icon-git-pull-request"></i></a>
+                            </div>
+
+                            <div class="media-body">
+                                Drop the IE <a href="#">specific hacks</a> for temporal inputs
+                                <div class="media-annotation">4 minutes ago</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+
+        <div class="navbar-right">
+            <p class="navbar-text">alicek106</p>
+
+            <p class="navbar-text"><span class="label bg-success">Online</span></p>
+
+            <script>
+                if (navigator.onLine == false){
+                }
+                else{
+                    //<p class="navbar-text"><span class="label bg-danger">Offline</span></p>
+
+                }
+            </script>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-bell2"></i>
+                        <span class="visible-xs-inline-block position-right">Activity</span>
+                        <span class="status-mark border-pink-300"></span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-content">
+                        <div class="dropdown-content-heading">
+                            Alarms
+
+                            <ul class="icons-list">
+                                <li><a href="#"><i class="icon-sync"></i></a></li>
+                            </ul>
+                        </div>
+
+                        <ul class="media-list dropdown-content-body width-350">
+                            <li class="media">
+                                <div class="media-left">
+                                    <a href="#" class="btn bg-success-400 btn-rounded btn-icon btn-xs"><i class="icon-mention"></i></a>
+                                </div>
+
+                                <div class="media-body">
+                                    <a href="#">Job has finished</a> <br></br>
+                                    HPC Job has finished
+                                    <div class="media-annotation">4 minutes ago</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- /main navbar -->
+
+
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main sidebar -->
+        <div class="sidebar sidebar-main">
+            <div class="sidebar-content">
+
+                <!-- User menu -->
+                <div class="category-content">
+                    <div class="sidebar-user-material-content">
+                        <a href="index" onclick="sessionStorage.setItem('page', 4)">
+                            <img src="image/Kyung_Hee_University_Seal.png" style="max-width: 100%; height: auto;" class="img-circle img-responsive" alt=""/>
+                        </a>
+                        <h6>alicek106</h6>
+                        <span class="text-size-small">Kyung Hee Univ. Young In</span>
+                    </div>
+
+                    <div class="sidebar-user-material-menu">
+                        <a href="#user-nav" data-toggle="collapse"><span>My account</span> <i class="caret"></i></a>
+                    </div>
+                </div>
+
+                <div class="navigation-wrapper collapse" id="user-nav">
+                    <ul class="navigation">
+                        <li><a href="#"><i class="icon-user-plus"></i> <span>My profile</span></a></li>
+                        <li><a href="#"><i class="icon-coins"></i> <span>My balance</span></a></li>
+                        <li><a href="#"><i class="icon-comment-discussion"></i> <span><span class="badge bg-teal-400 pull-right">58</span> Messages</span></a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="icon-cog5"></i> <span>Account settings</span></a></li>
+                        <li><a href="#"><i class="icon-switch2"></i> <span>Logout</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- /user menu -->
+
+
+                <!-- Main navigation -->
+                <div class="sidebar-category sidebar-category-visible">
+                    <div class="category-content no-padding">
+                        <ul class="navigation navigation-main navigation-accordion">
+
+                            <!-- Main -->
+                            <li class="navigation-header"><span>Menu</span> <i class="icon-menu" title="Main pages"></i></li>
+                            <!--<li><a href="index" onclick="sessionStorage.setItem('page', '4')"><i class="glyphicon glyphicon-th-large"></i> <span>Summary Report</span></a></li>-->
+                            <li><a href="index" onclick="sessionStorage.setItem('page', '1')"><i class="icon-home4"></i> <span>Image Management</span></a></li>
+                            <li><a href="index" onclick="sessionStorage.setItem('page', '3')"><i class="glyphicon glyphicon-star"></i> <span>Job Launch</span></a></li>
+                            <li><a href="index" onclick="sessionStorage.setItem('page', '2')"><i class="glyphicon glyphicon-heart"></i> <span>Cluster Management</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /main navigation -->
+            </div>
+        </div>
+        <!-- /main sidebar -->
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <div id = "frame"></div>
+            <script>
+                switch (sessionStorage.getItem('page')){
+                    case '1' :
+                        $('#frame').load('/image?uid='+sessionStorage.getItem('user'));
+                        break;
+                    case '2' :
+                        $('#frame').load('/cluster?uid='+sessionStorage.getItem('user'));
+                        break;
+                    case '3' :
+                        $('#frame').load('/job?uid='+sessionStorage.getItem('user'));
+                        break;
+                    case '4' :
+                        $('#frame').load('/dashboard?uid='+sessionStorage.getItem('user'));
+                        break;
+                }
+            </script>
+        </div>
+        <!-- /main content -->
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->
+
+</body>
+</html>

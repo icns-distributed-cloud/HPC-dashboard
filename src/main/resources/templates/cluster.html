@@ -1,0 +1,320 @@
+<html xmlns:c="http://www.w3.org/1999/XSL/Transform" xmlns:th="http://www.w3.org/1999/xhtml">
+<script type="text/javascript" src="assets/js/plugins/notifications/pnotify.min.js"></script>
+
+<script type="text/javascript" src="assets/js/plugins/tables/datatables/datatables.min.js"></script>
+<script type="text/javascript" src="assets/js/plugins/forms/selects/select2.min.js"></script>
+<script type="text/javascript" src="assets/js/pages/form_select2.js"></script>
+<script type="text/javascript" src="assets/js/pages/datatables_basic.js"></script>
+
+<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+
+<script type="text/javascript" src="assets/js/plugins/visualization/echarts/echarts.js"></script>
+<script type="text/javascript" src="assets/js/charts/echarts/candlesticks_others.js"></script>
+
+<script type="text/javascript" src="assets/js/pages/components_modals.js"></script>
+
+<script type="text/javascript" src="js/cluster.js"></script>
+<!-- Page header -->
+<script>
+    if(sessionStorage.getItem('newjob') != null){
+        sessionStorage.removeItem('newjob');
+        new PNotify({
+            title : 'Successfully launched new Job.',
+            text : 'Check your jobs',
+            addclass : 'bg-success'
+        });
+    }
+
+
+    $.ajax({
+        type : "POST",
+        url : CHECK_URL,
+        data:{
+            user:sessionStorage.getItem('user')
+        },
+        success : function(result) {
+            console.log(result)
+            var response = JSON.parse(result.result);
+
+            if(response.count == 1){
+                console.log('write output file...')
+                writeResultFile(sessionStorage.getItem('user'), response.created, response.output)
+            }else{
+                console.log('0')
+            }
+        },
+        error:function(request,status,error){
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+    });
+
+</script>
+<div class="page-header page-header-default">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4>
+                <i class="icon-heart5 position-left"></i>
+                <span class="text-semibold">Cluster Management</span>
+            </h4>
+        </div>
+        <!--
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a href="#" class="btn btn-link btn-float has-text" data-toggle="modal" data-target="#modal_default">
+                    <i class="icon-file-plus text-primary"></i><span>Create new Cluster</span>
+                </a>
+            </div>
+        </div>
+        -->
+    </div>
+
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li>
+                <a href="index.html">
+                    <i class="icon-home2 position-left">
+                    </i>
+                    Home
+                </a>
+            </li>
+            <li>
+                <i class="icon-heart5 position-left"> </i>
+                Cluster Management
+            </li>
+            <!-- <li class="active">Sizing</li>  -->
+        </ul>
+
+        <ul class="breadcrumb-elements">
+            <li>
+                <a data-toggle="modal" data-target="#modal_support">
+                    <i class="icon-comment-discussion position-left"></i>
+                    Support
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /page header -->
+
+<!-- Content area -->
+<div class="content">
+    <div class="content-group-lg">
+
+        <div id="panel-running" class="alert alert-success alert-styled-left" style="display:none;">
+            Cluster has been successfully created and cluster is running state.
+        </div>
+
+        <div id="panel-idle" class="alert alert-info alert-styled-left" style="display:none;">
+            Cluster is not running
+        </div>
+
+    </div>
+
+    <!--
+    <h6 class="content-group text-semibold">
+        Form components
+        <small class="display-block">Inputs, selects, checkboxes, radios, groups etc.</small>
+    </h6>
+    -->
+
+
+    <div id="resource-data" style="display:none;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-body border-top-success">
+                    <div class="text-center">
+                        <h6 class="no-margin text-semibold">Network I/O Limit</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p class="mb-15 text-muted"><code>Network Ingress</code></p>
+                            </div>
+                            <button class="form-control bg-success text-center"><span id="neti-limit">4</span>MB/s</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p class="mb-15 text-muted"><code>Network Egress</code></p>
+                            </div>
+                            <button class="form-control bg-success text-center"><span id="neto-limit">4</span>MB/s</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-body border-top-success">
+                    <div class="text-center">
+                        <h6 class="no-margin text-semibold">Block I/O Limit</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p class="mb-15 text-muted"><code>Block Input</code></p>
+                            </div>
+                            <button class="form-control bg-success text-center"><span id="blki-limit">4</span>MB/s</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <p class="mb-15 text-muted"><code>Block Output</code></p>
+                            </div>
+                            <button class="form-control bg-success text-center"><span id="blko-limit">4</span>MB/s</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-body border-top-success">
+                    <div class="text-center">
+                        <h6 class="no-margin text-semibold">Allocated Servers</h6>
+                        <p class="mb-15 text-muted"><code><span id="image-name"></span></code></p>
+                    </div>
+
+                    <input type="text" class="form-control bg-success text-center" id="panel-servers" value=""/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-body border-top-success text-center">
+                    <h6 class="no-margin text-semibold">Cluster Memory Usage</h6>
+                    <p class="mb-15 text-muted"> <code><span id="memory-usage"></span></code></p>
+
+                    <div class="progress progress-lg">
+                        <div class="progress-bar bg-success progress-bar-striped active" id="mem-gauge" style="width: 10%">
+                            <span id="memory-percent"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-body border-top-success text-center">
+                    <h6 class="no-margin text-semibold">Cluster CPU Usage</h6>
+                    <p class="mb-15 text-muted"> <code><span id="cpu-usage"></span></code></p>
+
+                    <div class="progress progress-lg">
+                        <div class="progress-bar bg-success progress-bar-striped active" id="cpu-gauge" style="width: 20%">
+                            <span id="cpu-percent"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-flat">
+        <div class="panel-heading">
+            <h5 class="panel-title">Allocated Server List</h5>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a data-action="collapse"></a></li>
+                    <li><a data-action="reload"></a></li>
+                    <li><a data-action="close"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <span id="server-count"></span> containers are allocated.
+        </div>
+
+        <table class="table text-nowrap" width="100%">
+            <thead>
+            <tr>
+                <th>Job Name</th>
+                <th>Image</th>
+                <th style="display:none;">Container Name</th>
+                <th>Status</th>
+                <th>Created</th>
+
+                <th class="text-center">Result File</th>
+            </tr>
+            </thead>
+
+            <tbody id="table-root">
+                <tr th:each="listValue,status : ${containerList}">
+                    <td><span th:text="${listValue.jobName}"></span></td>
+                    <td>
+                        <span th:text="${listValue.image}" ></span>
+                    </td>
+                    <td style="display:none;"><span></span></td>
+                    <td><span th:text="${listValue.alive}" th:id="'container-status-' + ${status.index}"></span></td>
+                    <td><span th:text="${listValue.created}"></span></td>
+
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <a th:href="${'result/' + listValue.user + '-' + listValue.created + '.txt'}"
+                               th:attr="download=${listValue.user + '-' + listValue.created + '.txt'}">
+                                <i class="icon-file-empty"></i>
+                            </a>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Extra large table -->
+    <!--
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <div class="chart-container">
+                        <div class="chart has-fixed-height" id="gauge_basic"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <div class="chart-container">
+                        <div class="chart has-fixed-height" id="gauge_styling"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+    <!-- Footer -->
+    <div class="footer text-muted">
+        &copy; 2017. Kyung Hee Univ by <a
+            href="http://blog.naver.com/alice_k106" target="_blank">alicek106</a>
+    </div>
+    <!-- /footer -->
+</div>
+
+<div id="modal_support" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h6 class="modal-title">Support Information</h6>
+            </div>
+
+            <div class="modal-body">
+                <h6 class="text-semibold">Technical Support</h6>
+                <hr/>
+                <p>Kyung Hee University, ICNS Lab.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    setTable()
+</script>
+</html>
